@@ -1,0 +1,101 @@
+<!-- N683-RACIOCÍNIO LÓGICO E ALGORÍTMICO
+
+GRUPO 50
+
+ALAN MAGALHÃES BARROS – 2323798
+ALISSON RAFAEL SILVA DE ALMEIDA – 2323789
+CRISTIANO BRANDÃO DA SILVA – 2326912
+GABRIEL NOGUEIRA IBIAPINA – 2326250
+JOSÉ ALVES FERREIRA NETO – 2325747
+YURI DA SILVA FERREIRA – 2326231
+
+>>>>>> Descrição da atividade de extensão/prática:
+
+Faça um programa que apresente o menu de opções a seguir, que permita ao usuário escolher a opção desejada, receba os dados
+necessários para executar a operação e mostre o resultado (tela do navegador, prompt ou console). Verifique a possibilidade de opção
+inválida e não se preocupe com as restrições como salário inválido. -->
+
+<!-- Menu de opções:
+1. Novo salário
+2. Férias
+3. Décimo terceiro
+4. Sair
+Digite a opção desejada. 
+
+OBS.: 
+
+1. Com a finalidade de deixar o código o mais limpo possível não foi construída nenhuma marcação HTML (DOCTYPE, head, body, footer, etc);
+2. Sentiu-se a necessidade de criar validadores para a entrada de dados, mesmo que não tenha sido solicitado;
+3. O programa faz com que o usuário seja redirecionado ao menu, dessa forma fazendo com que um mesmo funcionário possa realizar a consulta
+que desejar sem precisar reabrir o sistema. Para sair do menu será necessário inserir a entrada '4' dando controle ao usuário.
+
+-->
+
+<meta charset="UTF-8">
+
+<script>
+
+alert('Bem-vindo(a) ao Sistema de Gerenciamento de Recursos Humanos (SGRH)!');
+
+        let escolha; 
+
+        // Loop que sairá do programa caso o usuário digite 4
+        while (escolha !== 4) {
+            escolha = parseInt(prompt('Escolha uma das seguintes opções: \n1. Novo salário  \n2. Férias \n3. Décimo terceiro salário\n4. Sair'));
+
+            // Validador de entrada do dado
+            
+            if (isNaN(escolha) || escolha < 1 || escolha > 4) {
+                alert('Por favor, digite um número válido de 1 a 4!');
+                continue;
+            }
+
+            // Condicional para aplicação do ajuste salarial
+            if (escolha === 1) {
+                let salario = parseFloat(prompt('Digite o seu salário atual em R$: '));
+                let novo_salario;
+
+                if (salario <= 1200) {
+                    novo_salario = salario + (salario * 0.15);
+                } else if (salario <= 2400) {
+                    novo_salario = salario + (salario * 0.10);
+                } else {
+                    novo_salario = salario + (salario * 0.05)
+                }
+
+                alert(`Seu novo salário será de R$ ${novo_salario.toFixed(2)}!`);
+            }   
+
+            // Recebimento do valor do salário e cálculo do salário de férias
+            if (escolha === 2) {
+
+                let salario = parseFloat(prompt('Digite o seu salário atual em R$: '));
+                let valor_ferias = salario + (salario/3)
+                alert(`Seu salário de férias será de R$ ${valor_ferias.toFixed(2)}!`);
+            } 
+
+            // Recebimento do valor do salário e número de meses de trabalho (max de 12, fazendo a validação)
+            if (escolha === 3) {
+
+                let salario = parseFloat(prompt('Digite o seu salário atual em R$: '));
+                let meses;
+
+                do {
+                    meses = parseInt(prompt('Digite quantos meses você trabalhou [1-12]: '));
+
+                    if (isNaN(meses) || meses < 1 || meses > 12) {
+                        alert('Por favor, digite uma quantidade entre 1 e 12 meses!');
+                    }
+                } while (isNaN(meses) || meses < 1 || meses > 12);
+
+                let salario13 = (salario * meses) / 12;
+                alert(`Seu 13º salário será de R$ ${salario13.toFixed(2)}!`);
+            }
+        }
+
+        // Mensagem de finalização (usuário digitou 4)
+        alert('Você optou por sair do programa! Até breve!')   
+               
+</script>
+
+
